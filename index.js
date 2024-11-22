@@ -7,6 +7,7 @@ import conectarDB from "./config/mongodb.js"; // importacion de la base de datos
 import UsuarioRoute from "./routes/UsuarioRoute.js";
 import CalleRoute from "./routes/CalleRoute.js";
 import OnuRoute from "./routes/OnuRoute.js";
+import CuadrillaRoute from "./routes/CuadrillaRoute.js";
 
 // cargamos las variables de entorno
 dotenv.config();
@@ -35,6 +36,8 @@ app.use("/api/usuario", UsuarioRoute);
 app.use("/api/calle", CalleRoute);
 // onu
 app.use("/api/onu", OnuRoute);
+// cuadrilla
+app.use("/api/cuadrilla", CuadrillaRoute);
 
 // Iniciar el servidor | para este se necesitan dos cosas importantes, definir puerto y arrancar la app
 
