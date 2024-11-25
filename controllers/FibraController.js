@@ -27,12 +27,11 @@ const fibraControllers = {
       res.status(500).json({ mensaje: "Error al obtener las fibras", error });
     }
   },
-  obtenerFibraPorNumeracion = async(req, res) => {
+  obtenerFibraPorNumeracion: async (req, res) => {
     try {
-      const fibra = await Fibra.findOne({ numeracion: req.params.numeracion }).populate(
-        "buffer.pelo.cto",
-        "numeracion estado"
-      );
+      const fibra = await Fibra.findOne({
+        numeracion: req.params.numeracion,
+      }).populate("buffer.pelo.cto", "numeracion estado");
       if (!fibra) {
         return res.status(404).json({ mensaje: "Fibra no encontrada" });
       }
@@ -41,7 +40,7 @@ const fibraControllers = {
       res.status(500).json({ mensaje: "Error al obtener la fibra", error });
     }
   },
-  actualizarFibra : async (req, res) => {
+  actualizarFibra: async (req, res) => {
     try {
       const fibraActualizada = await Fibra.findOneAndUpdate(
         { numeracion: req.params.numeracion },
@@ -59,9 +58,11 @@ const fibraControllers = {
       res.status(500).json({ mensaje: "Error al actualizar la fibra", error });
     }
   },
-  eliminarFibra : async (req, res) => {
+  eliminarFibra: async (req, res) => {
     try {
-      const fibraEliminada = await Fibra.findOneAndDelete({ numeracion: req.params.numeracion });
+      const fibraEliminada = await Fibra.findOneAndDelete({
+        numeracion: req.params.numeracion,
+      });
       if (!fibraEliminada) {
         return res.status(404).json({ mensaje: "Fibra no encontrada" });
       }
@@ -69,8 +70,7 @@ const fibraControllers = {
     } catch (error) {
       res.status(500).json({ mensaje: "Error al eliminar la fibra", error });
     }
-  }
-
+  },
 };
 
 export default fibraControllers;
