@@ -2,13 +2,15 @@
 import express from "express"; // framework para creacion de proyectos (minimalista)
 import dotenv from "dotenv"; // variables de entorno
 import conectarDB from "./config/mongodb.js"; // importacion de la base de datos
-// import cors from "cors"; no es necesario al menos que tenga front
+import cors from "cors"; // no es necesario al menos que tenga front
 
 import UsuarioRoute from "./routes/UsuarioRoute.js";
 import CalleRoute from "./routes/CalleRoute.js";
 import OnuRoute from "./routes/OnuRoute.js";
 import CuadrillaRoute from "./routes/CuadrillaRoute.js";
 import PlanRoute from "./routes/PlanRoute.js";
+import NodoRoute from "./routes/NodoRoute.js";
+import AbonadoRoute from "./routes/AbonadoRoute.js";
 
 // cargamos las variables de entorno
 dotenv.config();
@@ -20,7 +22,7 @@ conectarDB();
 const app = express();
 
 // evitar cors
-// app.use(cors());
+app.use(cors());
 
 // Middleware para leer JSON en las solicitudes
 app.use(express.json());
@@ -41,6 +43,10 @@ app.use("/api/onu", OnuRoute);
 app.use("/api/cuadrilla", CuadrillaRoute);
 // plan
 app.use("/api/plan", PlanRoute);
+// nodo
+app.use("/api/nodo", NodoRoute);
+// abonado
+app.use("/api/abonado", AbonadoRoute);
 
 // Iniciar el servidor | para este se necesitan dos cosas importantes, definir puerto y arrancar la app
 
