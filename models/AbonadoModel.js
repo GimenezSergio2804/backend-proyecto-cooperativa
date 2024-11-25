@@ -24,5 +24,5 @@ const abonadoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Abonado = mongoose.model("abonados", abonadoSchema);
+const Abonado = mongoose.model("Abonados", abonadoSchema);
 export default Abonado;
