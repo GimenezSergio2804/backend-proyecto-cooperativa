@@ -8,6 +8,7 @@ import UsuarioRoute from "./routes/UsuarioRoute.js";
 import CalleRoute from "./routes/CalleRoute.js";
 import OnuRoute from "./routes/OnuRoute.js";
 import CuadrillaRoute from "./routes/CuadrillaRoute.js";
+import PlanRoute from "./routes/PlanRoute.js";
 
 // cargamos las variables de entorno
 dotenv.config();
@@ -38,6 +39,8 @@ app.use("/api/calle", CalleRoute);
 app.use("/api/onu", OnuRoute);
 // cuadrilla
 app.use("/api/cuadrilla", CuadrillaRoute);
+// plan
+app.use("/api/plan", PlanRoute);
 
 // Iniciar el servidor | para este se necesitan dos cosas importantes, definir puerto y arrancar la app
 

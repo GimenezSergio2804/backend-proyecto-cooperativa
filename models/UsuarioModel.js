@@ -21,7 +21,7 @@ const usuarioSchema = new mongoose.Schema(
     perfil: {
       type: String,
       default: function () {
-        return `../public/img/${this.legajo}.jpg`;
+        return `../public/img/empleados/${this.legajo}.jpg`;
       },
     },
     password: { type: String, required: true, default: "1234" },
