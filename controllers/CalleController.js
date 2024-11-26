@@ -3,8 +3,29 @@ import Calle from "../models/CalleModel.js";
 const CalleController = {
   obtenerCalles: async (req, res) => {
     try {
-      const calles = await Calle.find({});
-      res.status(200).json(calles);
+      // Obtener parametros de paginacion desde la query (valores predeterminados: pagina 1, 10 elementos por pagina)
+      const { page = 1, pageSize = 10 } = req.query;
+
+      // convertimos a numeros para evitar errores
+      const pageNumber = parseInt(page, 10);
+      const pageSizeNumber = parseInt(pageSize, 10);
+
+      // Calcular el número de documentos a omitir
+      const skip = (pageNumber - 1) * pageSizeNumber;
+
+      // Realizar la consulta paginada
+      const calles = await Calle.find().skip(skip).limit(pageSizeNumber);
+
+      // Contar el total de documentos en la colección
+      const total = await Calle.countDocuments();
+
+      // Enviar la respuesta con las calles y el total
+      res.status(200).json({
+        calles,
+        total,
+        page: pageNumber,
+        pageSize: pageSizeNumber,
+      });
     } catch (error) {
       res
         .status(500)
@@ -14,8 +35,24 @@ const CalleController = {
 
   crearCalle: async (req, res) => {
     const { nombre } = req.body;
+
+    // verificamos q el campo no esta vacion
+    if (!nombre) {
+      return res.status(400).json({ mensajeError: "El nombre es obligatorio" });
+    }
+
+    // converti el nombre a mayusculas( no me hace falta porque ya lo hace mi modelo)
+    // const nombreEnMayusculas = nombre.toUpperCase();
+
     try {
-      const calleNueva = await Calle.create({ nombre });
+      // Verificar si la calle ya existe
+      const calleExistente = await Calle.findOne({ nombre: nombre });
+      if (calleExistente) {
+        return res.status(400).json({ mensajeError: "La calle ya existe" });
+      }
+
+      const calleNueva = await Calle.create({ nombre: nombre });
+
       res.status(201).json({ mensaje: "Calle Creada con exito", calleNueva });
     } catch (error) {
       res.status(400).json({ mensajeError: "Error al cargar la calle", error });

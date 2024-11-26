@@ -34,7 +34,7 @@ const UsuarioController = {
 
         usuario: {
           id: usuario._id,
-          nombres: usuario.nombre,
+          nombres: usuario.nombres,
           apellidos: usuario.apellidos,
           rol: usuario.rol,
           perfil: usuario.perfil,
