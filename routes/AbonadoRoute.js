@@ -7,6 +7,10 @@ const router = express.Router();
 router.post("/crear-abonado", abonadosController.crearAbonado);
 router.get("/obtener-abonados", abonadosController.obtenerAbonados);
 router.get("/obtener-abonadoId/:id", abonadosController.obtenerAbonadoPorId);
+router.get(
+  "/obtener-abonadoNombreApellido",
+  abonadosController.obtenerAbonadoNombreApellido
+);
 router.put("/actualizar-abonado/:id", abonadosController.actualizarAbonado);
 router.delete("/eliminar-abonado/:id", abonadosController.eliminarAbonado);
 

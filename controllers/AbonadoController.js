@@ -78,6 +78,35 @@ const AbonadoController = {
         .json({ mensajeError: "Error al eliminar abonado", error });
     }
   },
+
+  obtenerAbonadoNombreApellido: async (req, res) => {
+    try {
+      const { nombre, apellido } = req.query;
+      console.log(nombre, apellido);
+
+      // objeto como para realizar la query
+      let query = {};
+
+      if (nombre) {
+        query.nombres = { $regex: nombre, $options: "i" }; // hago q no sea sensible a mayuscula y minuscula
+      }
+      if (apellido) {
+        query.apellidos = { $regex: apellido, $options: "i" };
+      }
+
+      // Buscar abonados que coincidan con la consulta
+      const abonados = await Abonado.find(query);
+
+      if (abonados.length > 0) {
+        res.status(200).json(abonados);
+      } else {
+        res.status(404).json({ message: "No se encontraron abonados" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error en el servidor" });
+    }
+  },
 };
 
 export default AbonadoController;
