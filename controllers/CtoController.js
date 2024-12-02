@@ -4,6 +4,28 @@ import Cto from "../models/CtoModel.js";
 const ctoController = {
   crearCto: async (req, res) => {
     try {
+      const { cantidad_puertos } = req.body;
+
+      if (
+        !cantidad_puertos ||
+        isNaN(cantidad_puertos) ||
+        cantidad_puertos <= 0
+      ) {
+        return res
+          .status(400)
+          .json({ mensajeError: "Cantidad de puertos inválida" });
+      }
+
+      const puertos = [];
+      for (let i = 1; i <= cantidad_puertos; i++) {
+        puertos.push({
+          numero: i,
+          abonado: null,
+        });
+      }
+
+      req.body.puerto = puertos;
+
       const nuevaCto = new Cto(req.body);
       const ctoGuardada = await nuevaCto.save();
       res

@@ -8,10 +8,10 @@ const planSchema = new mongoose.Schema({
     required: true,
   },
   velocidadSubida: {
-    type: Number,
+    type: String,
   },
   velocidadBajada: {
-    type: Number,
+    type: String,
   },
   valor: {
     type: String,

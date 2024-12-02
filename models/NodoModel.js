@@ -8,6 +8,10 @@ const nodoSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  ubicacion: {
+    lat: { type: Number, required: false }, // Latitud
+    lng: { type: Number, required: false }, // Longitud
+  },
 });
 
 const Nodo = mongoose.model("Nodos", nodoSchema);
