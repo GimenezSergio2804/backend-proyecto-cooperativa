@@ -160,6 +160,19 @@ const UsuarioController = {
         .json({ mensajeError: "Error al eliminar el usuario", error });
     }
   },
+
+  obtenerTecnicos: async (req, res) => {
+    try {
+      const tecnicos = await Usuario.find({ sector: "tecnico" }).select(
+        "nombres apellidos contacto"
+      );
+      res.json(tecnicos);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ mensajeError: "Error al obtener todos los tecnicos", error });
+    }
+  },
 };
 
 export default UsuarioController;

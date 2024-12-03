@@ -17,7 +17,7 @@ const cuadrillaSchema = new mongoose.Schema(
     ],
     tipo: {
       type: String,
-      enum: ["reparacion", "instalacion", "plantel"],
+      enum: ["Instalacion", "Reparacion", "Plantel"],
     },
     activo: {
       type: Boolean,
