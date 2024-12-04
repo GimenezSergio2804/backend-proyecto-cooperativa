@@ -11,8 +11,8 @@ router.post("/login", UsuarioController.login);
 router.get("/obtener-usuarios", UsuarioController.obtenerUsuarios);
 // buscar por id
 router.get("/obtener-usuario/:id", UsuarioController.obtenerUsuarioId);
-// obtener tecnicos
-router.get("/tecnicos", UsuarioController.obtenerTecnicos);
+// obtener tecnicos activos
+router.get("/obtener-tecnicos", UsuarioController.obtenerTecnicosActivos);
 // crear usuario
 router.post("/crear-usuario", UsuarioController.crearUsuario);
 // actualizar usuario

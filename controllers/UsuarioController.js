@@ -161,16 +161,26 @@ const UsuarioController = {
     }
   },
 
-  obtenerTecnicos: async (req, res) => {
+  obtenerTecnicosActivos: async (req, res) => {
     try {
-      const tecnicos = await Usuario.find({ sector: "tecnico" }).select(
-        "nombres apellidos contacto"
-      );
-      res.json(tecnicos);
+      // Filtrar usuarios por sector "tecnico" y estado "activo"
+      const tecnicosActivos = await Usuario.find({
+        sector: "tecnico",
+        estado: "activo",
+      });
+
+      // Verificar si hay técnicos activos
+      if (tecnicosActivos.length === 0) {
+        return res
+          .status(404)
+          .json({ mensajeError: "No hay técnicos activos disponibles" });
+      }
+
+      // Devolver la lista de técnicos activos
+      res.status(200).json(tecnicosActivos);
     } catch (error) {
-      res
-        .status(500)
-        .json({ mensajeError: "Error al obtener todos los tecnicos", error });
+      console.log(error);
+      res.status(500).json(tecnicosActivos);
     }
   },
 };

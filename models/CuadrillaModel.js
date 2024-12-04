@@ -19,10 +19,6 @@ const cuadrillaSchema = new mongoose.Schema(
       type: String,
       enum: ["Instalacion", "Reparacion", "Plantel"],
     },
-    activo: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   {

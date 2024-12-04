@@ -10,7 +10,19 @@ const usuarioSchema = new mongoose.Schema(
       enum: ["caja", "admin", "callcenter", "tecnico", "sistemas", "gerencia"],
       required: true,
     },
-    activo: { type: Boolean, default: false },
+    estado: {
+      type: String,
+      enum: [
+        "activo",
+        "bloqueado",
+        "vaciones",
+        "asignado",
+        "libre",
+        "no disponible",
+      ],
+      required: false,
+      default: "activo",
+    },
     email: { type: String, required: true, unique: true },
     contacto: { type: String },
     rol: {
