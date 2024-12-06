@@ -6,6 +6,10 @@ const router = express.Router();
 router.post("/crear-pago", pagoController.crearPago);
 router.get("/obtener-pagos", pagoController.obtenerPagos);
 router.get("/obtener-pagoId/:id", pagoController.obtenerPagoPorId);
+router.get(
+  "/obtener-pagos-estado-false",
+  pagoController.obtenerPagosEstadoFalse
+);
 router.put("/actualizar-pago/:id", pagoController.actualizarPago);
 router.delete("/eliminar-pago/:id", pagoController.eliminarPago);
 router.patch("/estado-pago/:id/estado", pagoController.cambiarEstado);

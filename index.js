@@ -15,6 +15,7 @@ import CtoRoute from "./routes/CtoRoute.js";
 import FibraRoute from "./routes/FibraRoute.js";
 import PagoRoute from "./routes/PagoRoute.js";
 import ServicioRoute from "./routes/ServicioRoute.js";
+import InstalacionRoute from "./routes/InstalacionRoute.js";
 
 // cargamos las variables de entorno
 dotenv.config();
@@ -59,6 +60,8 @@ app.use("/api/fibra", FibraRoute);
 app.use("/api/pago", PagoRoute);
 // servicios
 app.use("/api/servicio", ServicioRoute);
+//
+app.use("/api/instalacion", InstalacionRoute);
 
 // Iniciar el servidor | para este se necesitan dos cosas importantes, definir puerto y arrancar la app
 

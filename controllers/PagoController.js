@@ -104,6 +104,18 @@ const pagoController = {
         .json({ mensajeError: "Error al cambiar el estado", error });
     }
   },
+
+  // obtener pagos con estado false
+  obtenerPagosEstadoFalse: async (req, res) => {
+    try {
+      const pagos = await Pago.find({ estado: false });
+      res.status(200).json(pagos);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ mensajeError: "Error al obtener los pagos", error });
+    }
+  },
 };
 
 export default pagoController;
