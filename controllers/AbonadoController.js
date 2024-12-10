@@ -16,10 +16,7 @@ const AbonadoController = {
   },
   obtenerAbonados: async (req, res) => {
     try {
-      const abonados = await Abonado.find()
-        .populate("direccion", "nombre")
-        .populate("entrecalle1", "nombre")
-        .populate("entrecalle2", "nombre");
+      const abonados = await Abonado.find();
       res.status(200).json(abonados);
     } catch (error) {
       res.status(500).json({ mensajeError: "Error al obtener los abonados" });
@@ -28,11 +25,7 @@ const AbonadoController = {
   obtenerAbonadoPorId: async (req, res) => {
     try {
       const { id } = req.params;
-      const abonado = await Abonado.findById(id)
-        .populate("direccion", "nombre")
-        .populate("entrecalle1", "nombre")
-        .populate("entrecalle2", "nombre");
-
+      const abonado = await Abonado.findById(id);
       if (!abonado) {
         return res.status(404).json({ mensajeError: "Abonado no encontrado" });
       }

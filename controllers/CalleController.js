@@ -109,6 +109,20 @@ const CalleController = {
       res.status(404).json({ mensajeError: "Error al eliminar la calle" });
     }
   },
+  callesSinPaginar: async (req, res) => {
+    try {
+      const calles = await Calle.find();
+
+      // Enviar la respuesta con las calles y el total
+      res.status(200).json({
+        calles,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ mensajeError: "Error al obtener las calles", error });
+    }
+  },
 };
 
 export default CalleController;

@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/crear-instalacion", InstalacionController.crearInstalacion);
 // obtener todas las instalaciones
 router.get(
-  "/obtener-instalaciones",
+  "/obtener-instalacionesActivas",
   InstalacionController.obtenerInstalaciones
 );
 // obtener instalación por ID

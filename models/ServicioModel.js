@@ -4,7 +4,7 @@ const serviciosSchema = new mongoose.Schema(
   {
     tipo: {
       type: String,
-      enum: ["Internet", "alarma"],
+      enum: ["Internet", "Alarma"],
       required: true,
     },
     pago: {
@@ -14,13 +14,13 @@ const serviciosSchema = new mongoose.Schema(
     contactos: {
       type: String, // Opcional, podría sacarse del abonado
     },
-    usuario: {
-      _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Usuarios",
-        required: true,
-      }, // Referencia al usuario
-    },
+    // usuario: {
+    //   _id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Usuarios",
+    //     required: true,
+    //   }, // Referencia al usuario
+    // },
     coordenadas: {
       type: {
         latitud: { type: Number },
@@ -34,7 +34,7 @@ const serviciosSchema = new mongoose.Schema(
         ref: "Calles",
         required: true,
       }, // Relación con la colección de calles
-      numeracion: { type: Number, required: true }, // Número de la dirección
+      numeracion: { type: String, required: true }, // Número de la dirección
       entrecalle1: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Calles",
@@ -66,12 +66,18 @@ const serviciosSchema = new mongoose.Schema(
     },
     idGestar: {
       type: Number, // No obligatorio
+      default: 0,
     },
     nodo: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Nodo",
-      required: false, // Puede ser opcional según el contexto
+      ref: "Nodos",
+      required: true, // Puede ser opcional según el contexto
     },
+    // instalacionId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Instalaciones",
+    //   required: true, // Puede ser opcional según el contexto
+    // },
   },
   {
     timestamps: true, // Para registrar automáticamente createdAt y updatedAt

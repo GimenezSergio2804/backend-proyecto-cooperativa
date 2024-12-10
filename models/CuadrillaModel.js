@@ -26,6 +26,6 @@ const cuadrillaSchema = new mongoose.Schema(
   }
 );
 
-const Cuadrilla = mongoose.model("Cuadrilla", cuadrillaSchema);
+const Cuadrilla = mongoose.model("Cuadrillas", cuadrillaSchema);
 
 export default Cuadrilla;

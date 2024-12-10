@@ -10,6 +10,8 @@ router.post("/crear-calle", CalleController.crearCalle);
 router.get("/obtener-calles", CalleController.obtenerCalles);
 // obtener calle por id
 router.get("/obtener-calleId/:id", CalleController.obtenerCalleId);
+// obtener calles sin paginar
+router.get("/obtenerCallesSP", CalleController.callesSinPaginar);
 // editar calle
 router.put("/actualizar-calle/:id", CalleController.actualizarCalle);
 // eliminar calle

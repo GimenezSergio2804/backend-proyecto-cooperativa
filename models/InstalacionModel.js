@@ -4,18 +4,17 @@ const InstalacionSchema = new mongoose.Schema(
   {
     abonado: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Abonado",
+      ref: "Abonados",
       required: true,
     },
     idGestar: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Servicio", // Referencia al servicio, no obligatorio
+      type: Number,
       required: false,
     },
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Usuario",
-      required: true, // Usuario que carga la instalación
+      ref: "Usuarios",
+      required: false, // Usuario que carga la instalación
     },
     observacionesAdministrativas: {
       type: String, // Traído del servicio al momento de la instalación
@@ -26,37 +25,38 @@ const InstalacionSchema = new mongoose.Schema(
       longitud: { type: String, required: false },
     },
     direccion: {
-      calle: { type: String, required: true },
-      numeracion: { type: Number, required: true },
-      entrecalle1: { type: String, required: false },
-      entrecalle2: { type: String, required: false },
+      calle: { type: mongoose.Schema.Types.ObjectId, ref: "Calles" },
+      entrecalle1: { type: mongoose.Schema.Types.ObjectId, ref: "Calles" },
+      entrecalle2: { type: mongoose.Schema.Types.ObjectId, ref: "Calles" },
+      numeracion: { type: String, required: true },
     },
     referencias: {
       type: String, // Información adicional de referencia (puede venir del servicio)
-      required: false,
+      required: true,
     },
     prioridad: {
       type: String, // Puede ser "Alta", "Media", "Baja"
       enum: ["Alta", "Media", "Baja"],
-      required: true,
+      required: false,
     },
     plan: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Plan",
-      required: false, // Traído del servicio
+      ref: "Planes",
+      required: true, // Traído del servicio
     },
     nodo: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Nodo",
-      required: false, // Traído del servicio
+      ref: "Nodos",
+      required: true, // Traído del servicio
     },
     estado: {
-      type: Boolean, // Estado de completado (true o false)
-      required: false,
+      type: String,
+      enum: ["pendiente", "completado", "cancelado"],
+      required: true,
     },
     instalador: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Cuadrilla",
+      ref: "Cuadrillas",
       required: false, // Relacionado con la cuadrilla asignada
     },
     observacionesTecnicas: {
@@ -65,7 +65,7 @@ const InstalacionSchema = new mongoose.Schema(
     },
     onu: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ONU",
+      ref: "Onus",
       required: false,
     },
     radius: {
@@ -74,7 +74,7 @@ const InstalacionSchema = new mongoose.Schema(
     },
     cto: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "CTO",
+      ref: "Ctos",
       required: false,
     },
     diaCoordinado: {
@@ -88,7 +88,7 @@ const InstalacionSchema = new mongoose.Schema(
     },
     activo: {
       type: Boolean,
-      default: true, // Activo por defecto
+      default: true,
     },
     potenciaInstalacion: {
       type: String, // Potencia medida durante la instalación

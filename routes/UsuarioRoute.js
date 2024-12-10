@@ -7,6 +7,7 @@ const router = express.Router();
 
 // login
 router.post("/login", UsuarioController.login);
+router.get("/usuario", authMiddleware, UsuarioController.devolverDatos);
 // obtener usuarios
 router.get("/obtener-usuarios", UsuarioController.obtenerUsuarios);
 // buscar por id

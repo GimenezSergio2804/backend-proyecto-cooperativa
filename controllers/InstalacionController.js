@@ -84,8 +84,16 @@ const InstalacionController = {
   // Obtener todas las instalaciones
   obtenerInstalaciones: async (req, res) => {
     try {
-      const instalaciones = await Instalacion.find()
-        .populate("abonado", "nombre apellido")
+      const instalaciones = await Instalacion.find({ estado: "pendiente" })
+        .populate("abonado", "nombres apellidos")
+        .populate({
+          path: "direccion",
+          populate: [
+            { path: "calle", select: "nombre" },
+            { path: "entrecalle1", select: "nombre" },
+            { path: "entrecalle2", select: "nombre" },
+          ],
+        })
         .populate("usuario", "nombre correo")
         .populate("plan", "nombre precio")
         .populate("nodo", "nombre")
@@ -108,8 +116,16 @@ const InstalacionController = {
       const { id } = req.params;
 
       const instalacion = await Instalacion.findById(id)
-        .populate("abonado", "nombre apellido")
+        .populate("abonado", "nombres apellidos")
         .populate("usuario", "nombre correo")
+        .populate({
+          path: "direccion",
+          populate: [
+            { path: "calle", select: "nombre" },
+            { path: "entrecalle1", select: "nombre" },
+            { path: "entrecalle2", select: "nombre" },
+          ],
+        })
         .populate("plan", "nombre precio")
         .populate("nodo", "nombre")
         .populate("instalador", "nombre cuadrilla")

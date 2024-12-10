@@ -183,6 +183,23 @@ const UsuarioController = {
       res.status(500).json(tecnicosActivos);
     }
   },
+  devolverDatos: async (req, res) => {
+    try {
+      const usuarioId = req.userId;
+
+      const usuario = await Usuario.findById(usuarioId).select(
+        "nombre sector rol"
+      ); // Incluye solo los campos que necesitas
+      if (!usuario) {
+        return res.status(404).json({ mensajeError: "Usuario no encontrado" });
+      }
+
+      res.json(usuario); // Devuelve los datos del usuario
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ mensajeError: "Error del servidor" });
+    }
+  },
 };
 
 export default UsuarioController;
