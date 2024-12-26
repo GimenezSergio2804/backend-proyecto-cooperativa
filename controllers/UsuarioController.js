@@ -122,12 +122,20 @@ const UsuarioController = {
   actualizarUsuario: async (req, res) => {
     try {
       const { id } = req.params;
-      const { nombres, apellidos, sector, email, telefono, rol, activo } =
-        req.body;
+      const {
+        nombres,
+        apellidos,
+        sector,
+        legajo,
+        email,
+        telefono,
+        rol,
+        activo,
+      } = req.body;
 
       const usuario = await Usuario.findByIdAndUpdate(
         id,
-        { nombres, apellidos, sector, email, telefono, rol, activo },
+        { nombres, apellidos, sector, legajo, email, telefono, rol, activo },
         { new: true } // me devuelve el documento actualizado, y no el anterior
       );
 
